@@ -6,45 +6,114 @@
 <title>Za moje prase ❤️</title>
 
 <style>
-body{
-margin:0;
-padding:0;
-background:white;
-font-family:Arial,sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-text-align:center;
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff0f3; /* Nežna roze pozadina */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Promenjeno da bi dugačko pismo moglo lepo da se skroluje */
+    text-align: center;
+    overflow-x: hidden;
+    position: relative;
 }
 
-.box{
-padding:30px;
+.box {
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.05);
+    max-width: 500px;
+    width: 90%;
+    margin: 40px auto;
+    z-index: 2; /* Da tekst bude ispred srca koja padaju */
 }
 
-h1{
-font-size:36px;
-color:#ff4f81;
+h1 {
+    font-size: 36px;
+    color: #ff4f81;
 }
 
-p{
-font-size:20px;
-color:#555;
+p {
+    font-size: 20px;
+    color: #555;
+    line-height: 1.6;
 }
 
-button{
-margin-top:30px;
-padding:15px 35px;
-font-size:20px;
-border:none;
-border-radius:30px;
-background:#ff4f81;
-color:white;
-cursor:pointer;
+/* Stil za pismo */
+.pismo {
+    font-size: 18px;
+    text-align: left; /* Pismo lepše izgleda kad je poravnato levo */
+    background: #fff8f9;
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 4px solid #ff4f81;
+    margin: 25px 0;
 }
 
-button:hover{
-transform:scale(1.05);
+/* Galerija sa vašim slikama */
+.galerija img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    margin: 15px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+button {
+    margin-top: 20px;
+    padding: 15px 35px;
+    font-size: 20px;
+    border: none;
+    border-radius: 30px;
+    background: #ff4f81;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Stil za veliku skočnu poruku */
+.popup {
+    display: none; /* Sakriveno dok se ne klikne */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 79, 129, 0.95);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: bold;
+    z-index: 10;
+    flex-direction: column;
+}
+
+.popup button {
+    background: white;
+    color: #ff4f81;
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+/* Roze srca koja padaju */
+.srce {
+    position: fixed;
+    color: #ffb3c6;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 1;
+    animation: padanje linear infinite;
+}
+
+@keyframes padanje {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 </style>
 
@@ -52,16 +121,62 @@ transform:scale(1.05);
 
 <body>
 
+<!-- Ovde se stvaraju roze srca -->
+<div class="srce" style="left: 10%; animation-duration: 5s;">❤️</div>
+<div class="srce" style="left: 30%; animation-duration: 7s; font-size: 30px;">❤️</div>
+<div class="srce" style="left: 55%; animation-duration: 6s;">❤️</div>
+<div class="srce" style="left: 75%; animation-duration: 8s; font-size: 20px;">❤️</div>
+<div class="srce" style="left: 90%; animation-duration: 5.5s;">❤️</div>
+
 <div class="box">
 
-<h1>Pigiiiii ❤️</h1>
+    <h1>Pigiiiii ❤️</h1>
 
-<p>Napravila sam gift za tebe.</p>
+    <p>Napravila sam ovaj gift za tebe.</p>
 
-<button>💌 OTVORI IZNENAĐENJE</button>
+    <!-- TVOJE PISMO: Ovde unesi svoj tekst između <p> i </p> -->
+    <div class="pismo">
+        <p>
+            Pigi moj lepi... <br><br>
+            Hvala ti puno za svaki trenutak koji provedemo zajedno,
+          ti si moja omiljena osoba i niko nikad ne može da mi te zameni
+          Najbolje mi je kad si ti tu, tad je sve nekako lakše...
+          Previše sam srećna što se viđamo i čujemo svaki dan i volela bih da tako ostane i na dalje🤞🏽
+          Da znaš da uvek mislim na tebe i jedva čekam da te opet vidim🥰
+          I da mi se previše sviđaš pig hehehe
+          pusa oinkie💋
+        </p>
+    </div>
+
+    <!-- VAŠE SLIKE: Ovde promeni nazive u ono kako ti se zovu slike -->
+    <div class="galerija">
+        <img src="slika1.jpg" alt="Naša prva slika">
+        <img src="slika2.jpg" alt="Naša druga slika">
+    </div>
+
+    <!-- Glavno dugme na dnu stranice -->
+    <button onclick="prikaziPoruku()">💌 OTVORI ME</button>
 
 </div>
 
-</body>
+<!-- Velika poruka koja iskače na klik dugmeta -->
+<div id="mojPopup" class="popup">
+    <span>VOLIM TE! ❤️</span>
+    <button onclick="zatvoriPoruku()">Zatvori X</button>
+</div>
 
-</html>
+<script>
+// Funkcija koja prikazuje veliku "VOLIM TE" poruku preko celog ekrana
+function prikaziPoruku() {
+    document.getElementById("mojPopup").style.display = "flex";
+}
+
+// Funkcija da se poruka zatvori ako želi ponovo da gleda slike
+function zatvoriPoruku() {
+    document.getElementById("mojPopup").style.display = "none";
+}
+</script>
+
+</body>
+      </html>
+      
